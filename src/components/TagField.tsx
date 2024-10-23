@@ -1,35 +1,25 @@
 import React from "react";
 import { useState, ChangeEvent } from "react";
+import { DevTag } from "../types/types";
 
-interface iTag {
-  tags: string[];
-  addTag: (tag: string) => void;
-  removeTag: (tag: string) => void;
-}
 
-export const TagField = ({ tags, addTag, removeTag }: iTag) => {
-  // track the use input
-
+export const TagField = ({ developers, addDeveloper, removeDeveloper }: DevTag) => {
   const [userInput, setUserInput] = useState<string>("");
-
-  // Handle input onChange
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
   };
 
-  // handle Enter key press
-
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Prevent form submission or new line creation
+      e.preventDefault();
 
       if (
         userInput.trim() !== "" &&
         userInput.length <= 12
       ) {
-        addTag(userInput);
-        setUserInput(""); // Clear the input after adding a tag
+        addDeveloper(userInput);
+        setUserInput("");
       }
     }
   };
@@ -49,7 +39,7 @@ export const TagField = ({ tags, addTag, removeTag }: iTag) => {
       {/* ===== Render the tags here ===== */}
 
       <div className="flex flex-row flex-wrap gap-3 mt-4">
-        {tags.map((tag: string, index: number) => (
+        {developers.map((tag: string, index: number) => (
           <span
             key={`${index}-${tag}`}
             className="inline-flex items-start justify-start px-3 py-2 rounded-[32px] text-sm shadow-sm font-medium bg-blue-100 text-blue-800 mr-2"
@@ -57,7 +47,7 @@ export const TagField = ({ tags, addTag, removeTag }: iTag) => {
             {tag}
             <button
               className="ml-2 hover:text-blue-500"
-              onClick={() => removeTag(tag)}
+              onClick={() => removeDeveloper(tag)}
               title={`Remove ${tag}`}
             >
               &times;

@@ -1,10 +1,21 @@
+import { useState } from 'react';
 import './App.css';
+import { SingleLine } from './components/SingleLine';
 import { TagField } from './components/TagField';
-import useTag from './hooks/useTag';
+import useTag from './hooks/useDeveloper';
+import { AvailabilityData, DevRow } from './types/types';
+
+function generateAvailability(rows: number): AvailabilityData {
+  // Create an array with the specified number of rows
+  return Array.from({ length: rows }, () => Array(10).fill(1) as DevRow);
+}
+
 
 function App() {
 
-  const { tags, handleAddTag, handleRemoveTag } = useTag();
+  const { developers, handleAddDeveloper, handleRemoveDeveloper } = useTag();
+
+  const [ availability, setAvailability ] = useState(generateAvailability(developers.length));
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -42,12 +53,30 @@ function App() {
               <label className='font-bold'>Developers:</label>
               <form>
                 <TagField
-                  tags={tags}
-                  addTag={handleAddTag}
-                  removeTag={handleRemoveTag}
+                  developers={developers}
+                  addDeveloper={handleAddDeveloper}
+                  removeDeveloper={handleRemoveDeveloper}
                 />
               </form>
             </fieldset>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto flex gap-4 mt-4">
+          <div className="w-full bg-white p-4 shadow rounded">
+          <div className="grid grid-cols-11 gap-4">
+            <div key={-1} className=""></div>
+            {Array.from({ length: 10 }, (_, index) => (
+              <div key={index}>
+                <span className='font-bold text-gray-200 w-5 block text-center'>{ index + 1 }</span>
+              </div>
+            ))}
+          </div>
+            { developers.map( (developer) => {
+                return (
+                  <SingleLine key={developer} name={ developer } />
+                )
+            } ) }
           </div>
         </div>
       </main>
