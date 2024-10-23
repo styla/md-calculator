@@ -25,13 +25,13 @@ function App() {
           <div className="w-1/2 bg-white p-4 shadow rounded">
             <fieldset>
               <label className='font-bold'>MD Budget:</label>
-              <input type="number" className='ml-4' value="20" />
+              <input type="number" className='ml-4 pl-2' value="20" />
             </fieldset>
           </div>
           <div className="w-1/2 bg-white p-4 shadow rounded">
             <fieldset>
               <label className='font-bold'>Previous Sprint Carryover:</label>
-              <input type="number" className='ml-4' value="0" />
+              <input type="number" className='ml-4 pl-2' value="0" />
             </fieldset>
           </div>
         </div>
