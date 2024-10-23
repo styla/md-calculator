@@ -64,11 +64,25 @@ function App() {
     });
   }
 
+  const toggleRows = (rowIndex: number): AvailabilityData => {
+    return availability.map((row, index) => {
+      if (index === rowIndex) {
+        return row.map(() => getNewValue(availability[rowIndex][0])) as DevRow;
+      }
+      
+      return row;
+    });
+  }
+
   const onColumnClick = (index: number) => {
     const updatedData = toggleColumns(index);
     setAvailability(updatedData);
   }
 
+  const onRowClick = (index: number) => {
+    const updatedData = toggleRows(index);
+    setAvailability(updatedData);
+  }
 
   useEffect( () => {
     const newAvailability = adjustAvailability();
@@ -151,6 +165,7 @@ function App() {
                     availability={ availability } 
                     devIndex={index} 
                     setAvailability={ setAvailability }
+                    onRowClick={ onRowClick }
                   />
                 )
             } ) }

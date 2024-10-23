@@ -4,7 +4,8 @@ type TLlineProps = {
   name: string;
   availability: AvailabilityData;
   devIndex: number;
-  setAvailability: ( availibility: AvailabilityData ) => void;
+  setAvailability: ( availability: AvailabilityData ) => void;
+  onRowClick: (index: number) => void;
 }
 
 const getFill = ( value: AcceptedValues ): string => {
@@ -33,7 +34,7 @@ export const getNewValue = ( value: AcceptedValues ): number => {
   }
 }
 
-export const SingleLine = ({ name, availability, devIndex, setAvailability }: TLlineProps) => {
+export const SingleLine = ({ name, availability, devIndex, setAvailability, onRowClick }: TLlineProps) => {
 
   const devAvailability = availability[devIndex];
 
@@ -63,7 +64,7 @@ export const SingleLine = ({ name, availability, devIndex, setAvailability }: TL
     <div className="flex flex-col mt-4">
       <div className="grid grid-cols-11 gap-4">
         <div key={-1} className="">
-            <span className="cursor-pointer">{ name }</span>
+            <span onClick={ () => onRowClick(devIndex) } className="cursor-pointer select-none">{ name }</span>
         </div>
         {Array.from({ length: 10 }, (_, index) => {
 
