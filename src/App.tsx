@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 import './App.css';
 import { SingleLine } from './components/SingleLine';
 import { TagField } from './components/TagField';
@@ -6,16 +6,47 @@ import useTag from './hooks/useDeveloper';
 import { AvailabilityData, DevRow } from './types/types';
 
 function generateAvailability(rows: number): AvailabilityData {
-  // Create an array with the specified number of rows
   return Array.from({ length: rows }, () => Array(10).fill(1) as DevRow);
 }
 
 
 function App() {
-
   const { developers, handleAddDeveloper, handleRemoveDeveloper } = useTag();
-
   const [ availability, setAvailability ] = useState(generateAvailability(developers.length));
+  const [ mdBudget, setMdBudget ] = useState(20);
+  const [ carryOver, setCarryover ] = useState(0);
+
+  const handleMdBudgetChange = (e: any) => { // TODO: I have no time for this shit
+    setMdBudget(e.target.value);
+  }
+
+  const handleCarryoverChange = (e: any) => { // TODO: I have no time for this shit
+    setCarryover(e.target.value);
+  }
+
+  const adjustAvailability = (): AvailabilityData => {
+    const currentRowCount = availability.length;
+  
+    if (currentRowCount === developers.length) {
+      return availability;
+    }
+  
+    const newRows: DevRow[] = Array.from(
+      { length: developers.length - currentRowCount },
+      () => Array(10).fill(1) as DevRow
+    );
+  
+    return [...availability, ...newRows];
+  }
+
+
+  useEffect( () => {
+    const newAvailability = adjustAvailability();
+
+    setAvailability(newAvailability);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [developers] )
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -36,13 +67,13 @@ function App() {
           <div className="w-1/2 bg-white p-4 shadow rounded">
             <fieldset>
               <label className='font-bold'>MD Budget:</label>
-              <input type="number" className='ml-4 pl-2' value="20" />
+              <input type="number" className='ml-4 pl-2' value={ mdBudget } onChange={handleMdBudgetChange} />
             </fieldset>
           </div>
           <div className="w-1/2 bg-white p-4 shadow rounded">
             <fieldset>
               <label className='font-bold'>Previous Sprint Carryover:</label>
-              <input type="number" className='ml-4 pl-2' value="0" />
+              <input type="number" className='ml-4 pl-2' value={ carryOver } onChange={handleCarryoverChange} />
             </fieldset>
           </div>
         </div>
@@ -72,9 +103,15 @@ function App() {
               </div>
             ))}
           </div>
-            { developers.map( (developer) => {
+            { developers.map( (developer, index) => {
                 return (
-                  <SingleLine key={developer} name={ developer } />
+                  <SingleLine 
+                    key={developer} 
+                    name={ developer } 
+                    availability={ availability } 
+                    devIndex={index} 
+                    setAvailability={ setAvailability }
+                  />
                 )
             } ) }
           </div>
