@@ -41,6 +41,10 @@ function App() {
     if (currentRowCount === developers.length) {
       return availability;
     }
+
+    if (currentRowCount > developers.length) {
+      return generateAvailability(developers.length);
+    }
   
     const newRows: DevRow[] = Array.from(
       { length: developers.length - currentRowCount },
@@ -141,6 +145,12 @@ function App() {
         <div className="max-w-7xl mx-auto flex gap-4 mt-4">
           <div className="w-full bg-white p-10 shadow rounded text-center font-bold">
             <span style={ { fontSize: '300px' } }>{ Math.round(budgetWithCarryover * 2) / 2 }</span>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto flex gap-4 mt-1 text-center">
+          <div className="w-full rounded text-center">
+            <span className='text-gray-500 text-sm'>Copyright 2024 Styla GmbH - All Rights Reserved</span>
           </div>
         </div>
       </main>
