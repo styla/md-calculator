@@ -1,14 +1,25 @@
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { SingleLine } from './components/SingleLine';
 import { TagField } from './components/TagField';
 import useTag from './hooks/useDeveloper';
 import { AvailabilityData, DevRow } from './types/types';
 
-function generateAvailability(rows: number): AvailabilityData {
+const generateAvailability = (rows: number): AvailabilityData => {
   return Array.from({ length: rows }, () => Array(10).fill(1) as DevRow);
 }
 
+const getScore = (availability: AvailabilityData) => {
+  let score = 0;
+
+  availability.forEach( (singleRow) => {
+    singleRow.forEach( (singleColumn) => {
+      score = score + singleColumn;
+    })
+  })
+
+  return score;
+};
 
 function App() {
   const { developers, handleAddDeveloper, handleRemoveDeveloper } = useTag();
@@ -47,6 +58,16 @@ function App() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [developers] )
+
+
+  const possibleTotalScore = developers.length * 10;
+
+  const score = getScore(availability);
+
+
+  const calcBudget = ( score * mdBudget ) / possibleTotalScore;
+  
+  const budgetWithCarryover = calcBudget - carryOver;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -95,14 +116,14 @@ function App() {
 
         <div className="max-w-7xl mx-auto flex gap-4 mt-4">
           <div className="w-full bg-white p-4 shadow rounded">
-          <div className="grid grid-cols-11 gap-4">
-            <div key={-1} className=""></div>
-            {Array.from({ length: 10 }, (_, index) => (
-              <div key={index}>
-                <span className='font-bold text-gray-200 w-5 block text-center'>{ index + 1 }</span>
-              </div>
-            ))}
-          </div>
+            <div className="grid grid-cols-11 gap-4">
+              <div key={-1} className=""></div>
+              {Array.from({ length: 10 }, (_, index) => (
+                <div key={index}>
+                  <span className='font-bold text-gray-200 w-5 block text-center cursor-pointer'>{ index + 1 }</span>
+                </div>
+              ))}
+            </div>
             { developers.map( (developer, index) => {
                 return (
                   <SingleLine 
@@ -114,6 +135,12 @@ function App() {
                   />
                 )
             } ) }
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto flex gap-4 mt-4">
+          <div className="w-full bg-white p-10 shadow rounded text-center font-bold">
+            <span style={ { fontSize: '300px' } }>{ Math.round(budgetWithCarryover * 2) / 2 }</span>
           </div>
         </div>
       </main>
