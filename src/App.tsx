@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import { SingleLine } from './components/SingleLine';
+import { getNewValue, SingleLine } from './components/SingleLine';
 import { TagField } from './components/TagField';
 import useTag from './hooks/useDeveloper';
 import { AvailabilityData, DevRow } from './types/types';
@@ -52,6 +52,21 @@ function App() {
     );
   
     return [...availability, ...newRows];
+  }
+
+  const toggleColumns = (columnIndex: number): AvailabilityData => {
+    return availability.map((row) => {
+      const updatedRow = row.map((value, index) => 
+        index === columnIndex ? getNewValue(availability[0][columnIndex]) : value
+      ) as DevRow;
+  
+      return updatedRow;
+    });
+  }
+
+  const onColumnClick = (index: number) => {
+    const updatedData = toggleColumns(index);
+    setAvailability(updatedData);
   }
 
 
@@ -124,7 +139,7 @@ function App() {
               <div key={-1} className=""></div>
               {Array.from({ length: 10 }, (_, index) => (
                 <div key={index}>
-                  <span className='font-bold text-gray-200 w-5 block text-center cursor-pointer'>{ index + 1 }</span>
+                  <span onClick={ () => onColumnClick(index) } className='font-bold text-gray-200 w-5 block text-center cursor-pointer select-none'>{ index + 1 }</span>
                 </div>
               ))}
             </div>

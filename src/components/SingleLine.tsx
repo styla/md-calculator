@@ -20,7 +20,7 @@ const getFill = ( value: AcceptedValues ): string => {
   }
 }
 
-const getNewValue = ( value: AcceptedValues ): number => {
+export const getNewValue = ( value: AcceptedValues ): number => {
   switch (value) {
     case 0.5:
         return 1;
