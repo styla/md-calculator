@@ -1,6 +1,11 @@
 import './App.css';
+import { TagField } from './components/TagField';
+import useTag from './hooks/useTag';
 
 function App() {
+
+  const { tags, handleAddTag, handleRemoveTag } = useTag();
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow p-4">
@@ -35,7 +40,13 @@ function App() {
           <div className="w-full bg-white p-4 shadow rounded">
             <fieldset>
               <label className='font-bold'>Developers:</label>
-              <input type="text" className='ml-4' value="developers here" />
+              <form>
+                <TagField
+                  tags={tags}
+                  addTag={handleAddTag}
+                  removeTag={handleRemoveTag}
+                />
+              </form>
             </fieldset>
           </div>
         </div>
