@@ -190,7 +190,7 @@ function App() {
 
                 <div className="max-w-7xl mx-auto flex gap-4 mt-1 text-center">
                     <div className="w-full rounded text-center">
-                        <span className='text-gray-500 text-sm'>Copyright &copy; 2024 Styla GmbH · All Rights Reserved ·  🏴‍☠️ Built on Hackday</span> · <a className='font-medium text-blue-600 dark:text-blue-500 hover:underline' target='_blank' href="https://github.com/styla/md-calculator">Source Code</a>
+                        <span className='text-gray-500 text-sm'>Copyright &copy; 2024 Styla GmbH · All Rights Reserved ·  🏴‍☠️ Built on Hackday</span> · <a className='font-medium text-sm text-gray-900 hover:underline' target='_blank' href="https://github.com/styla/md-calculator">Source Code</a>
                     </div>
                 </div>
             </main>
