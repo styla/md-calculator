@@ -8,16 +8,18 @@ type TLlineProps = {
   onRowClick: (index: number) => void;
 }
 
-const getFill = ( value: AcceptedValues ): string => {
+const GREEN = "#22c55e";
+
+const getPercentage = ( value: AcceptedValues ): string => {
   switch (value) {
     case 0.5:
-        return 'linear-gradient(45deg, #A2E297 50%, transparent 50%)';
+        return "50%";
 
     case 0:
-        return 'none';
+        return '0';
 
     case 1:
-        return '#A2E297';
+        return "100%";
   }
 }
 
@@ -73,8 +75,13 @@ export const SingleLine = ({ name, availability, devIndex, setAvailability, onRo
           return (
             <div key={index}>
               <div 
-                className="border-solid border border-gray-200 w-5 h-5 rounded-sm cursor-pointer" 
-                style={ { background: getFill(specificAvailability) } }
+                className="border-solid border border-gray-200 w-full h-5 rounded-sm cursor-pointer" 
+                style={ { 
+                  backgroundImage: `linear-gradient(90deg, ${GREEN} 100%, transparent 100%)`,
+                  transition: 'background-size 0.5s ease',
+                  backgroundSize: `${ getPercentage(specificAvailability) } 100%`,
+                  backgroundRepeat: 'no-repeat'
+                }}
                 onClick={ () => handleClick(index) }
               />
             </div>

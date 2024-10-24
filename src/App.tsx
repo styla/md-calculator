@@ -173,7 +173,7 @@ function App() {
               <div key={-1} className=""></div>
               {Array.from({ length: 10 }, (_, index) => (
                 <div key={index}>
-                  <span onClick={ () => onColumnClick(index) } className='font-bold text-gray-200 w-5 block text-center cursor-pointer select-none'>{ index + 1 }</span>
+                  <span onClick={ () => onColumnClick(index) } className='font-bold text-xs text-gray-300 w-full block text-center cursor-pointer select-none'>Day { index + 1 }</span>
                 </div>
               ))}
             </div>
