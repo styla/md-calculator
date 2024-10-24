@@ -184,13 +184,13 @@ function App() {
 
                 <div className="max-w-7xl mx-auto flex gap-4 mt-4">
                     <div className="w-full bg-white p-10 shadow rounded text-center font-bold">
-                        <span style={ { fontSize: 'min(60vw, 300px)' } }>{ budgetWithCarryover > 0 ? (Math.round(budgetWithCarryover * 2) / 2) : '🤷‍♂️' }</span>
+                        <span className='text-6xl sm:text-9xl md:text-16xl'>{ budgetWithCarryover > 0 ? (Math.round(budgetWithCarryover * 2) / 2) : '🤷‍♂️' }</span>
                     </div>
                 </div>
 
                 <div className="max-w-7xl mx-auto flex gap-4 mt-1 text-center">
                     <div className="w-full rounded text-center">
-                        <span className='text-gray-500 text-sm'>Copyright 2024 Styla GmbH - All Rights Reserved - <a href="https://github.com/styla/md-calculator">Source Code</a></span>
+                        <span className='text-gray-500 text-sm'>Copyright &copy; 2024 Styla GmbH · All Rights Reserved ·  🏴‍☠️ Built on Hackday</span> · <a className='font-medium text-blue-600 dark:text-blue-500 hover:underline' target='_blank' href="https://github.com/styla/md-calculator">Source Code</a>
                     </div>
                 </div>
             </main>

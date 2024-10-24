@@ -3,4 +3,4 @@ A simple tool for calculating the available Man Days during Sprint Planning.
 
 ![alt text](/screenshot.png)
 
-_🏴‍☠️ Built during Hackathon (23/10/2024)_
+🏴‍☠️ Built during Styla Hackday 23/10/2024 - Maintained by  [@antoniocosentino](https://github.com/antoniocosentino)
