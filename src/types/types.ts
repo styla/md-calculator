@@ -4,7 +4,7 @@ export type DevRow = ReadonlyArray<AcceptedValues>;
 
 export type AvailabilityData = ReadonlyArray<DevRow>;
 
-export type DevTag =  {
+export type DevTag = {
     developers: string[];
     addDeveloper: (tag: string) => void;
     removeDeveloper: (tag: string) => void;
