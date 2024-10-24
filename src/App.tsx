@@ -27,17 +27,15 @@ function App() {
     const [ availability, setAvailability ] = useState(generateAvailability(developers.length));
     const [ mdBudget, setMdBudget ] = useState(20);
     const [ carryOver, setCarryover ] = useState(0);
-
-    const personToData = new Map();
+    const [personToData, setPersonToData] = useState(new Map());
 
     const updatePersonToData = () => {
+        const newMap = new Map();
         developers.forEach((developer, index) => {
-            personToData.set(developer, availability[index]);
+            newMap.set(developer, availability[index]);
         });
+        setPersonToData(newMap);
     };
-
-    updatePersonToData();
-
 
     const recreateAvailability = () => developers.map((developer) => personToData.get(developer));
 
@@ -102,6 +100,10 @@ function App() {
 
         setAvailability(newAvailability);
     }, [developers]);
+
+    useEffect(() => {
+        updatePersonToData();
+    }, [developers, availability]);
 
     const possibleTotalScore = developers.length * 10;
 
