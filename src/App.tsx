@@ -26,13 +26,32 @@ function App() {
   const [ availability, setAvailability ] = useState(generateAvailability(developers.length));
   const [ mdBudget, setMdBudget ] = useState(20);
   const [ carryOver, setCarryover ] = useState(0);
+  
+  const personToData = new Map();
+  
+  const updatePersonToData = () => {
+    developers.forEach((developer, index) => {
+      personToData.set(developer, availability[index]);
+    })
+  };
 
-  const handleMdBudgetChange = (e: any) => { // TODO: I have no time for this shit
-    setMdBudget(e.target.value);
+  updatePersonToData();
+
+
+  const recreateAvailability = () => {
+    return developers.map( (developer) => {
+      return personToData.get(developer);
+    } )
+  };
+
+  const handleMdBudgetChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setMdBudget(isNaN(value) ? 0 : value);
   }
 
-  const handleCarryoverChange = (e: any) => { // TODO: I have no time for this shit
-    setCarryover(e.target.value);
+  const handleCarryoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(e.target.value);
+    setCarryover(isNaN(value) ? 0 : value);
   }
 
   const adjustAvailability = (): AvailabilityData => {
@@ -43,13 +62,15 @@ function App() {
     }
 
     if (currentRowCount > developers.length) {
-      return generateAvailability(developers.length);
+      return recreateAvailability();
     }
   
     const newRows: DevRow[] = Array.from(
       { length: developers.length - currentRowCount },
       () => Array(10).fill(1) as DevRow
     );
+
+    updatePersonToData();
   
     return [...availability, ...newRows];
   }
@@ -91,7 +112,6 @@ function App() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [developers] )
-
 
   const possibleTotalScore = developers.length * 10;
 
@@ -180,7 +200,7 @@ function App() {
 
         <div className="max-w-7xl mx-auto flex gap-4 mt-1 text-center">
           <div className="w-full rounded text-center">
-            <span className='text-gray-500 text-sm'>Copyright 2024 Styla GmbH - All Rights Reserved</span>
+            <span className='text-gray-500 text-sm'>Copyright 2024 Styla GmbH - All Rights Reserved - <a href="https://github.com/styla/md-calculator">Source Code</a></span>
           </div>
         </div>
       </main>
