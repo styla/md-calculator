@@ -120,7 +120,7 @@ function App() {
 
   const calcBudget = ( score * mdBudget ) / possibleTotalScore;
   
-  const budgetWithCarryover = calcBudget - carryOver;
+  const budgetWithCarryover = developers.length > 0 ? (calcBudget - carryOver) : -1;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -194,7 +194,7 @@ function App() {
 
         <div className="max-w-7xl mx-auto flex gap-4 mt-4">
           <div className="w-full bg-white p-10 shadow rounded text-center font-bold">
-            <span style={ { fontSize: 'min(60vw, 300px)' } }>{ Math.round(budgetWithCarryover * 2) / 2 }</span>
+            <span style={ { fontSize: 'min(60vw, 300px)' } }>{ budgetWithCarryover > 0 ? (Math.round(budgetWithCarryover * 2) / 2) : "🤷‍♂️" }</span>
           </div>
         </div>
 

@@ -1,8 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useDeveloper = () => {
   
-  const [developers, setDevelopers] = useState<string[]>([ 'Antonio', 'Franz', 'Josua', 'Redon', 'Sebastian' ]); // TODO: this is hardcoded only for dev purposes
+  const [developers, setDevelopers] = useState<string[]>(() => {
+    // Retrieve developers from localStorage if available, otherwise start with an empty array
+    const storedDevelopers = localStorage.getItem('developers');
+    return storedDevelopers ? JSON.parse(storedDevelopers) : [];
+  });
+
+  useEffect(() => {
+    // Store the developers array in localStorage whenever it changes
+    localStorage.setItem('developers', JSON.stringify(developers));
+  }, [developers]);
 
   const handleAddDeveloper = (newDeveloper: string) => {
     if (newDeveloper && !developers.includes(newDeveloper)) {
