@@ -64,8 +64,8 @@ export const SingleLine = ({ name, availability, devIndex, setAvailability, onRo
 
   return (
     <div className="flex flex-col mt-4">
-      <div className="grid grid-cols-11 gap-4">
-        <div key={-1} className="">
+      <div className="grid grid-cols-10 md:grid-cols-11 gap-4">
+        <div key={-1} className="col-span-11 md:col-span-1">
             <span onClick={ () => onRowClick(devIndex) } className="cursor-pointer select-none">{ name }</span>
         </div>
         {Array.from({ length: 10 }, (_, index) => {
@@ -75,12 +75,13 @@ export const SingleLine = ({ name, availability, devIndex, setAvailability, onRo
           return (
             <div key={index}>
               <div 
-                className="border-solid border border-gray-200 w-full h-5 rounded-sm cursor-pointer" 
+                className="border-solid border border-gray-200 w-full h-5 rounded-sm cursor-pointer aspect-square" 
                 style={ { 
                   backgroundImage: `linear-gradient(90deg, ${GREEN} 100%, transparent 100%)`,
                   transition: 'background-size 0.5s ease',
                   backgroundSize: `${ getPercentage(specificAvailability) } 100%`,
-                  backgroundRepeat: 'no-repeat'
+                  backgroundRepeat: 'no-repeat',
+                  paddingTop: '30%'
                 }}
                 onClick={ () => handleClick(index) }
               />

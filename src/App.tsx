@@ -146,7 +146,7 @@ function App() {
           </div>
           <div className="w-1/2 bg-white p-4 shadow rounded">
             <fieldset>
-              <label className='font-bold'>Previous Sprint Carryover:</label>
+              <label className='font-bold'>Carryover:</label>
               <input type="number" className='ml-4 pl-2 border border-gray-300 rounded-md px-4 py-2 w-16' value={ carryOver } onChange={handleCarryoverChange} />
             </fieldset>
           </div>
@@ -169,8 +169,8 @@ function App() {
 
         <div className="max-w-7xl mx-auto flex gap-4 mt-4">
           <div className="w-full bg-white p-4 shadow rounded">
-            <div className="grid grid-cols-11 gap-4">
-              <div key={-1} className=""></div>
+            <div className="grid grid-cols-10 md:grid-cols-11 gap-4">
+              <div key={-1} className='col-span-11 md:col-span-1'></div>
               {Array.from({ length: 10 }, (_, index) => (
                 <div key={index}>
                   <span onClick={ () => onColumnClick(index) } className='font-bold text-xs text-gray-300 w-full block text-center cursor-pointer select-none'>Day { index + 1 }</span>
@@ -194,7 +194,7 @@ function App() {
 
         <div className="max-w-7xl mx-auto flex gap-4 mt-4">
           <div className="w-full bg-white p-10 shadow rounded text-center font-bold">
-            <span style={ { fontSize: '300px' } }>{ Math.round(budgetWithCarryover * 2) / 2 }</span>
+            <span style={ { fontSize: 'min(60vw, 300px)' } }>{ Math.round(budgetWithCarryover * 2) / 2 }</span>
           </div>
         </div>
 
