@@ -5,7 +5,7 @@ const useDeveloper = () => {
   const [developers, setDevelopers] = useState<string[]>(() => {
     // Retrieve developers from localStorage if available, otherwise start with an empty array
     const storedDevelopers = localStorage.getItem('developers');
-    return storedDevelopers ? JSON.parse(storedDevelopers) : [];
+    return storedDevelopers ? JSON.parse(storedDevelopers) : ['Developer 1', 'Developer 2', 'Developer 3'];
   });
 
   useEffect(() => {
