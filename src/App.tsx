@@ -133,13 +133,13 @@ function App() {
                     <div className="w-1/2 bg-white p-4 shadow rounded">
                         <fieldset>
                             <label className='font-bold'>MD Budget:</label>
-                            <input type="number" className='ml-4 pl-2 border border-gray-300 rounded-md px-4 py-2 w-16' value={ mdBudget } onChange={handleMdBudgetChange} />
+                            <input type="number" step={ 0.5 } className='ml-4 pl-2 border border-gray-300 rounded-md px-4 py-2 w-17' value={ mdBudget } onChange={handleMdBudgetChange} />
                         </fieldset>
                     </div>
                     <div className="w-1/2 bg-white p-4 shadow rounded">
                         <fieldset>
                             <label className='font-bold'>Carryover:</label>
-                            <input type="number" className='ml-4 pl-2 border border-gray-300 rounded-md px-4 py-2 w-16' value={ carryOver } onChange={handleCarryoverChange} />
+                            <input type="number" step={ 0.5 } className='ml-4 pl-2 border border-gray-300 rounded-md px-4 py-2 w-17' value={ carryOver } onChange={handleCarryoverChange} />
                         </fieldset>
                     </div>
                 </div>
